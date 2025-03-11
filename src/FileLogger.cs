@@ -5,12 +5,12 @@ using System.IO;
 
 public class FileLogger
 {
-    private string filePath = String.Empty;
+    private string filePath = string.Empty;
     public string FilePath { 
         get { return filePath; }
         private set {
             // Never overwrite an existing file path unless explicitly called by the developer.
-            if (filePath == String.Empty)
+            if (filePath == string.Empty)
             {
                 filePath = value;
             } 
@@ -31,7 +31,7 @@ public class FileLogger
 
     public void WriteString(string message)
     {  
-        if (FilePath == String.Empty)
+        if (FilePath == string.Empty)
         {
             return;
         } 
@@ -63,7 +63,7 @@ public class FileLogger
         }
 
         columnSize = accum; 
-        return formatted;
+        return formatted + "\n";
     } 
 
     /// <summary>
