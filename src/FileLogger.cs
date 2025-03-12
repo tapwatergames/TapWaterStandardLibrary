@@ -21,7 +21,7 @@ public class FileLogger
         } 
     }  
 
-    public enum LogLevel 
+    public enum LogLevel : byte 
     { 
         Message,
         Warning,
@@ -30,7 +30,7 @@ public class FileLogger
     private LogLevel logLevel = LogLevel.Message
     public LogLevel LogLevel { get; set; }
     
-    public enum LogInGodot
+    public enum LogInGodot : byte
     {
         FALSE,
         TRUE,
