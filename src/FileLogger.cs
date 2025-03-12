@@ -19,7 +19,26 @@ public class FileLogger
             } 
             return;
         } 
-    }     
+    }  
+
+    public enum LogLevel 
+    { 
+        Message,
+        Warning,
+        ERROR,
+    }
+    private LogLevel logLevel = LogLevel.Message
+    public LogLevel LogLevel { get; set; }
+    
+    public enum LogInGodot
+    {
+        FALSE,
+        TRUE,
+    }
+
+    private LogInGodot logInGodot = LogInGodot.FALSE;
+    public LogInGodot LogInGodot { get; set; } 
+
 
     /// <summary>
     /// Takes a formated string (see FileLogger.FormatStringFromLog) and writes it to the current log file. 
@@ -50,13 +69,17 @@ public class FileLogger
         {
             try 
             {                    
-                GD.Print("NO file exists, creating new one.");
                 // Create New File
                 using (FileStream fs = File.Create(FilePath))
                 {
                     byte[] info = new UTF8Encoding(true).GetBytes(message);
                     // Add some information to the file.
                     fs.Write(info, 0, info.Length);
+
+                    if (LogInGodot = LogInGodot.TRUE)
+                    {
+                        GD.Print(message);
+                    }
                 }
             }
             catch (Exception e)
@@ -69,7 +92,6 @@ public class FileLogger
 
         try
         {
-            GD.Print("File exits, writing into it.");
             // Create the file, or overwrite if the file exists.
             using (FileStream fs = File.Open(FilePath, FileMode.Open))
             {
@@ -77,6 +99,11 @@ public class FileLogger
                 // Add some information to the file.
                 fs.Seek(0, SeekOrigin.End);
                 fs.Write(info, 0, info.Length);
+                
+                if (LogInGodot = LogInGodot.TRUE)
+                {
+                    GD.Print(message);
+                }
             }
 
         } 
